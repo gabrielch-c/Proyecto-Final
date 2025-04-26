@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +9,8 @@
   <style>
     img {
       width: 100%;
-      height: au}
+      height: au
+    }
 
     :root {
       --azul-oscuro: #2B265F;
@@ -82,8 +84,13 @@
       padding: 20px;
       text-align: center;
     }
+
+    .h-300 {
+      height: 300px;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -120,36 +127,40 @@
 
   <!-- Nosotros -->
   <section id="nosotros" class="info-section text-center">
-      <!-- Carousel -->
-  <div id="carouselConocenos" class="carousel slide mb-5" data-bs-ride="carousel">
-    <div class="carousel-inner rounded shadow">
-      <div class="carousel-item active">
-        <img src="../static/img/imagen1.jpg" class="d-block w-80" alt="Instalación 1">
-      </div>
-      <div class="carousel-item">
-        <img src="../static/img/imagen2.jpg" class="d-block w-80" alt="Instalación 2">
-      </div>
-      <div class="carousel-item">
-        <img src="../static/img/imagen3.jpg" class="d-block w-80" alt="Equipo Técnico">
-      </div>
-      <div class="carousel-item">
-        <img src="../static/img/imagen4.jpg" class="d-block w-80" alt="Proyecto Finalizado">
+    <!-- Carousel -->
+    <div class="container mb-5">
+      <div id="carouselConocenos" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-inner rounded shadow">
+          <div class="carousel-item active">
+            <img src="../static/img/imagen1.jpg" class="d-block  h-300" alt="Instalación 1">
+          </div>
+          <div class="carousel-item">
+            <img src="../static/img/imagen2.jpg" class="d-block  h-300" alt="Instalación 2">
+          </div>
+          <div class="carousel-item">
+            <img src="../static/img/imagen3.jpg" class="d-block  h-300" alt="Equipo Técnico">
+          </div>
+          <div class="carousel-item">
+            <img src="../static/img/imagen4.jpg" class="d-block  h-300" alt="Proyecto Finalizado">
+          </div>
+        </div>
+        <!-- Controles opcionales -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselConocenos" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselConocenos" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
       </div>
     </div>
-    <!-- Controles opcionales -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselConocenos" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselConocenos" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
     <div class="container">
       <h2>Misión</h2>
-      <p>Brindar un servicio eficiente, profesional y confiable en la gestión e instalación de artículos de línea blanca en proyectos inmobiliarios, asegurando coordinación oportuna y altos estándares de calidad.</p>
+      <p>Brindar un servicio eficiente, profesional y confiable en la gestión e instalación de artículos de línea blanca
+        en proyectos inmobiliarios, asegurando coordinación oportuna y altos estándares de calidad.</p>
 
       <h2 class="mt-5">Visión</h2>
-      <p>Ser la empresa líder en gestión técnica especializada para instalaciones de línea blanca en desarrollos habitacionales, reconocida por su excelencia operativa e innovación.</p>
+      <p>Ser la empresa líder en gestión técnica especializada para instalaciones de línea blanca en desarrollos
+        habitacionales, reconocida por su excelencia operativa e innovación.</p>
     </div>
   </section>
 
@@ -167,4 +178,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

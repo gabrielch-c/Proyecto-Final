@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formulario Técnico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-oscuro: #2B265F;
+            --azul-medio: #6C75A3;
+            --azul-claro: #C3C9E4;
+            --amarillo: #F9B42E;
+            --naranja: #F47B2A;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 0.5rem;
+        }
+
+        .custom-tab {
+            background-color: var(--azul-claro);
+            padding: 10px;
+            border-radius: 0.5rem;
+        }
+
+        .custom-tab .nav-link.active {
+            border-bottom: 3px solid var(--azul-oscuro);
+            color: var(--azul-oscuro);
+        }
+
+        .btn-upload {
+            background-color: var(--azul-claro);
+            color: var(--azul-oscuro);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .btn-upload:hover {
+            background-color: var(--azul-medio);
+            color: white;
+        }
+
+        .hero {
+            background-color: #2B265F;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .btn-custom {
+            background-color: #F47B2A;
+            color: white;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #F9B42E;
+            color: #2B265F;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            font-size: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #2B265F;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Gestión de Técnicos</a>
+            <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: flex-end;">
+                <ul class="navbar-nav" style="margin-right: 20px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color: white" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-custom me-2" style="color: white" href="#contacto">Nuevo Proyecto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" style="color: white;" href="#">Cerrar Sesión</a>
+                    </li>
+                </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>Editar Proyecto</h1>
+        <p>Asegúrta de que las imágenes ingresadas se vean con nitidez y que los SN coincidan con el producto.</p>
+    </div>
+
+    <div class="container">
+        <form class="row g-4 form-section">
+            <!-- Departamento -->
+            <div class="mb-3">
+                <label class="form-label">Departamento</label>
+                <input type="text" class="form-control" placeholder="Ingrese número o nombre">
+            </div>
+
+            <div class="container">
+                <h5 class="mb-3">Agregar Artículos al Departamento</h5>
+
+                <!-- Formulario para agregar artículos -->
+                <div class="mb-3 row align-items-center">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="inputProducto" placeholder="Producto">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="inputModelo" placeholder="Modelo">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="inputSerial" placeholder="Serial Number">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-agregar w-100" onclick="agregarArticulo(event)">+ Agregar
+                            artículo</button>
+                    </div>
+                </div>
+
+                <!-- Tabla de artículos -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Modelo</th>
+                            <th>Serial Number</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaArticulos">
+                        <!-- Filas dinámicas -->
+                    </tbody>
+                </table>
+                <!-- Mediciones -->
+                <div class="mb-3">
+                    <label class="form-label">Mediciones</label>
+                    <textarea class="form-control" rows="3" placeholder="Ingrese mediciones realizadas"></textarea>
+                </div>
+
+                <!-- Comentarios -->
+                <div class="mb-3">
+                    <label class="form-label">Comentarios</label>
+                    <textarea class="form-control" rows="3" placeholder="Ingrese comentarios adicionales"></textarea>
+                </div>
+
+                <!-- Adjuntar imágenes -->
+                <div class="mb-3">
+                    <label class="form-label d-block">Adjuntar imágenes📎</label>
+                    <input type="file" class="form-control-file" multiple>
+                </div>
+                <!-- Botones de acción -->
+                <div class="d-flex justify-content-between mt-4">
+                    <!-- Enlace para volver a editar_proyecto.html -->
+                    <button type="submit" class="btn btn-primary"> Guardar Proyecto</button>
+                </div>
+        </form>
+    </div>
+    <script>
+        let contador = 0;
+
+
+        function agregarArticulo(event) {
+            // Prevenir el comportamiento predeterminado del botón
+            event.preventDefault();
+
+            // Obtener valores de los inputs
+            const producto = document.getElementById('inputProducto').value.trim();
+            const modelo = document.getElementById('inputModelo').value.trim();
+            const serial = document.getElementById('inputSerial').value.trim();
+
+            // Validar que los campos no estén vacíos
+            if (producto && modelo && serial) {
+                // Crear una nueva fila con los datos ingresados
+                const fila = `
+                <tr>
+                    <td><input type="text" class="form-control" name="producto${contador}" value="${producto}"></td>
+                    <td><input type="text" class="form-control" name="modelo${contador}" value="${modelo}"></td>
+                    <td><input type="text" class="form-control" name="serial${contador}" value="${serial}"></td>
+                </tr>
+                `;
+                contador++;
+                // Agregar la fila a la tabla
+                document.getElementById('tablaArticulos').insertAdjacentHTML('beforeend', fila);
+
+                // Limpiar los inputs
+                document.getElementById('inputProducto').value = '';
+                document.getElementById('inputModelo').value = '';
+                document.getElementById('inputSerial').value = '';
+            } else {
+                alert('Por favor, completa todos los campos antes de agregar el artículo.');
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

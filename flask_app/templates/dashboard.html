@@ -59,15 +59,14 @@
                         <a class="btn btn-custom me-2" style="color: white" href="#contacto">Nuevo Proyecto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light" style="color: white;" href="#" data-bs-toggle="modal"
-                            data-bs-target="#registroModal">Cerrar Sesión</a>
+                        <a class="btn btn-outline-light" style="color: white;" href="#">Cerrar Sesión</a>
                     </li>
                 </ul>
     </nav>
 
     <div class="hero">
-        <h1>Bienvenido a la Gestión de Técnicos</h1>
-        <p>Gestión Técnica de Línea Blanca</p>
+        <h1>Bienvenido {{usuario.nombre}}</h1>
+        <p>Cargo: {{usuario.tipo}}</p>
     </div>
 
     <div class="container mt-4">
