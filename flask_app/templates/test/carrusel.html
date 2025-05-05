@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario de Proyecto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-oscuro: #2B265F;
+            --azul-medio: #6C75A3;
+            --azul-claro: #C3C9E4;
+            --amarillo: #F9B42E;
+            --naranja: #F47B2A;
+        }
+
+        .btn-primary {
+            background-color: var(--naranja);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--amarillo);
+            color: black;
+        }
+
+        .hero {
+            background-color: #2B265F;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .btn-custom {
+            background-color: #F47B2A;
+            color: white;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #F9B42E;
+            color: #2B265F;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            font-size: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        footer {
+            background-color: #2B265F;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #2B265F;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Gestión de Técnicos</a>
+            <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: flex-end;">
+                <ul class="navbar-nav" style="margin-right: 20px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color: white" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-custom me-2" href="#contacto">Nuevo Proyecto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="#" data-bs-toggle="modal"
+                            data-bs-target="#registroModal">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Bienvenido a la Gestión de Técnicos</h1>
+        <p>Gestión Técnica de Línea Blanca</p>
+    </div>
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Formulario de Proyecto</h2>
+        <form class="row g-4 form-section">
+            <!-- Columna izquierda -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Proyecto</label>
+                    <input type="text" class="form-control" placeholder="Nombre del proyecto">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Región</label>
+                    <select class="form-select" id="region" onchange="updateComunas()">
+                        <option selected disabled>Seleccionar región</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Comuna</label>
+                    <select class="form-select" id="comuna" disabled>
+                        <option selected disabled>Seleccionar comuna</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" class="form-control" placeholder="Dirección del proyecto">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Cantidad de departamentos</label>
+                    <input type="number" class="form-control" placeholder="Ej. 20">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Técnicos</label>
+                    <select class="form-select">
+                        <option selected disabled>Seleccionar técnico</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Supervisor</label>
+                    <select class="form-select">
+                        <option selected disabled>Seleccionar supervisor</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="col-md-6 d-flex flex-column gap-4">
+                <div class="date-box">
+                    <label class="form-label">Fecha de Inicio</label>
+                    <input type="date" class="form-control mt-1">
+                </div>
+                <div class="date-box">
+                    <label class="form-label">Fecha de Fin</label>
+                    <input type="date" class="form-control mt-1">
+                </div>
+            </div>
+
+            <!-- Botón -->
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary px-4">Guardar</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        © 2025 Soluciones Técnicas en Línea Blanca. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        const regionesYcomunas = {
+            "Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
+            "Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
+            "Antofagasta": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "Tocopilla", "María Elena"],
+            "Atacama": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"],
+            "Coquimbo": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"],
+            "Valparaíso": ["Valparaíso", "Viña del Mar", "Quilpué", "Villa Alemana", "Quillota", "La Calera", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo"],
+            "Libertador B. O'Higgins": ["Rancagua", "Graneros", "Rengo", "San Fernando", "Santa Cruz", "Pichilemu"],
+            "Maule": ["Talca", "Curicó", "Linares", "Cauquenes", "Parral", "San Javier", "Molina"],
+            "Ñuble": ["Chillán", "San Carlos", "Yungay", "Bulnes", "Quirihue"],
+            "Biobío": ["Concepción", "Los Ángeles", "Coronel", "Lota", "Talcahuano", "San Pedro de la Paz", "Hualpén", "Arauco", "Lebu"],
+            "La Araucanía": ["Temuco", "Padre Las Casas", "Angol", "Victoria", "Villarrica", "Pucón"],
+            "Los Ríos": ["Valdivia", "La Unión", "Río Bueno", "Panguipulli", "Futrono"],
+            "Los Lagos": ["Puerto Montt", "Puerto Varas", "Osorno", "Castro", "Ancud", "Quellón"],
+            "Aysén": ["Coyhaique", "Puerto Aysén", "Chile Chico", "Cochrane"],
+            "Magallanes y Antártica Chilena": ["Punta Arenas", "Puerto Natales", "Porvenir", "Puerto Williams"],
+            "Metropolitana de Santiago": ["Santiago", "Providencia", "Puente Alto", "La Florida", "Maipú", "Las Condes", "Ñuñoa", "San Bernardo", "Pudahuel", "Recoleta"]
+        };
+
+        const regionSelect = document.getElementById('region');
+        const comunaSelect = document.getElementById('comuna');
+
+        // Cargar opciones de región
+        window.onload = () => {
+            for (let region in regionesYcomunas) {
+                let option = document.createElement("option");
+                option.value = region;
+                option.text = region;
+                regionSelect.appendChild(option);
+            }
+        };
+
+        function updateComunas() {
+            const selectedRegion = regionSelect.value;
+            comunaSelect.innerHTML = '<option disabled selected>Seleccionar comuna</option>';
+
+            if (regionesYcomunas[selectedRegion]) {
+                regionesYcomunas[selectedRegion].forEach(comuna => {
+                    const option = document.createElement('option');
+                    option.value = comuna;
+                    option.text = comuna;
+                    comunaSelect.appendChild(option);
+                });
+                comunaSelect.disabled = false;
+            } else {
+                comunaSelect.disabled = true;
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

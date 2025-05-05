@@ -163,7 +163,7 @@
                 <input type="text" class="form-control" name="serie[]" placeholder="Número de Serie">
             </div>
             <div class="col-md-3">
-                <button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button>
+                <button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">X</button>
             </div>
             `;
 
@@ -174,7 +174,7 @@
             btn.closest('.row').remove();
         }
 
-        // Agregar al menos un producto al cargar
+
         window.onload = agregarProducto;
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

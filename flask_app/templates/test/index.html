@@ -74,14 +74,6 @@
                             <label for="registroConfirmarPassword" class="form-label">Confirmar contraseña</label>
                             <input type="password" class="form-control" id="registroConfirmarPassword" required>
                         </div>
-                        <div class="mb-4">
-                            <label for="registroRol" class="form-label">Tipo de usuario</label>
-                            <select class="form-select" id="registroRol" required>
-                                <option value="">Selecciona una opción</option>
-                                <option value="tecnico">Técnico</option>
-                                <option value="coordinador">Coordinador</option>
-                            </select>
-                        </div>
                         <button type="submit" class="btn btn-custom w-100">Registrarse</button>
                     </form>
                 </div>
@@ -114,7 +106,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg" style="background-color: #2B265F;">
+    <nav class="navbar navbar-expand-lg " style="background-color: #2B265F; position: fixed; width: 100%; z-index: 1;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Gestión de Técnicos</a>
             <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: flex-end;">
@@ -135,7 +127,7 @@
                 </ul>
     </nav>
 
-    <header class="hero">
+    <header class="hero" style="top: 15vh;">
         <h1>Soluciones Técnicas en Línea Blanca</h1>
         <p>Expertos en gestión e instalación de equipos para proyectos habitacionales.</p>
         <a href="#nosotros" class="btn btn-custom mt-4">Conócenos</a>
@@ -163,29 +155,146 @@
                 </div>
             </div>
         </section>
+        <!-- NUEVA SECCIÓN: Servicios -->
+        <section id="servicios" class="text-center py-5" style="background-color: #f4f6fa;">
+            <div class="container">
+                <h2 class="mb-4">Nuestros Servicios</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <i class="fas fa-tools fa-3x mb-3" style="color:#2B265F;"></i>
+                        <h5>Instalación de Equipos</h5>
+                        <p>Montaje profesional de electrodomésticos de línea blanca en obras nuevas y remodelaciones.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fas fa-user-cog fa-3x mb-3" style="color:#2B265F;"></i>
+                        <h5>Gestión de Técnicos</h5>
+                        <p>Asignación eficiente de personal calificado según los requerimientos de tu obra.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fas fa-wrench fa-3x mb-3" style="color:#2B265F;"></i>
+                        <h5>Mantenimiento</h5>
+                        <p>Revisiones periódicas y correctivas para asegurar el funcionamiento óptimo de los equipos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN: Ventajas -->
+        <section id="ventajas" class="text-center py-5 " style="background-color: #ffffff;">
+            <div class="container ">
+                <h2 class="mb-4">¿Por qué elegirnos?</h2>
+                <div class="row">
+                    <div class="col-md-3">
+                        <i class="fas fa-certificate fa-2x mb-2" style="color:#F47B2A;"></i>
+                        <p>Técnicos certificados</p>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fas fa-clock fa-2x mb-2" style="color:#F47B2A;"></i>
+                        <p>Entrega puntual</p>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fas fa-map-marked-alt fa-2x mb-2" style="color:#F47B2A;"></i>
+                        <p>Cobertura regional</p>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fas fa-handshake fa-2x mb-2" style="color:#F47B2A;"></i>
+                        <p>Relación de confianza</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN: Clientes o Proyectos -->
+        <section id="clientes" class="text-center py-5" style="background-color: #f4f6fa;">
+            <div class="container">
+                <h2 class="mb-4">Proyectos y Clientes</h2>
+                <p>Estas son algunas de las constructoras y empresas que confían en nosotros:</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-2">
+                        <img src="../static/img/logo1.png" alt="Cliente 1" class="img-fluid mb-3">
+                    </div>
+                    <div class="col-md-2">
+                        <img src="../static/img/logo2.png" alt="Cliente 2" class="img-fluid mb-3">
+                    </div>
+                    <div class="col-md-2">
+                        <img src="../static/img/logo3.png" alt="Cliente 3" class="img-fluid mb-3">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- NUEVA SECCIÓN: Contacto -->
+        <section id="contacto" class="text-center py-5" style="background-color: #6C75A3; color: white;">
+            <div class="container">
+                <h2 class="mb-4">Contáctanos</h2>
+                <p class="mb-5">¿Tienes un proyecto o consulta? Estamos aquí para ayudarte.</p>
+
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border-0 text-white">
+                            <div class="card-body">
+                                <i class="fas fa-envelope fa-3x mb-3"></i>
+                                <h5 class="card-title">Correo Electrónico</h5>
+                                <p><a href="mailto:contacto@tecnicos.cl"
+                                        class="text-white text-decoration-none">contacto@tecnicos.cl</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border-0 text-white">
+                            <div class="card-body">
+                                <i class="fas fa-phone fa-3x mb-3"></i>
+                                <h5 class="card-title">Teléfono</h5>
+                                <p><a href="tel:+56912345678" class="text-white text-decoration-none">+56 9 1234
+                                        5678</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border-0 text-white">
+                            <div class="card-body">
+                                <i class="fab fa-whatsapp fa-3x mb-3"></i>
+                                <h5 class="card-title">WhatsApp</h5>
+                                <p><a href="https://wa.me/56912345678" target="_blank"
+                                        class="text-white text-decoration-none">+56 9 1234 5678</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de contacto opcional -->
+
+            </div>
+            <div class="mt-5 mb-5 p-5" style="background-color: #F47B2A; color: white;">
+                <h5>¿Prefieres que te contactemos?</h5>
+                <form class="row g-3 justify-content-center mt-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="email" class="form-control" placeholder="Tu correo" required>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="form-control" rows="3" placeholder="Mensaje" required></textarea>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <button type="submit" class="btn btn-custom w-100">Enviar Mensaje</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
     </main>
 
-    <section id="contacto" class="info-section text-center " style="background-color: #6C75A3;">
-        <h2 style="padding-top: 20px;">Contacto</h2>
-        <div class="container d-flex justify-content-around flex-rows align-items-center p-5">
-            <div>
-                <a href="mailto:contacto@lineablancatecnica.com" style="text-decoration: none; color: inherit;">
-                    <i class="fas fa-envelope fa-5x"></i>
-                </a>
-                <p>correo: contacto@tecnicos.cl</p>
-            </div>
-            <div>
-                <a href="tel:+56912345678" style="text-decoration: none; color: inherit;">
-                    <i class="fas fa-phone fa-5x"></i>
-                </a>
-                <p>teléfono: +56912345678</p>
-            </div>
-            <div>
-                <a href="https://wa.me/56912345678" target="_blank" style="text-decoration: none; color: inherit;">
-                    <i class="fab fa-whatsapp fa-5x"></i>
-                </a>
-                <p>whatsapp: +56912345678</p>
-            </div>
+
+    <section class="text-center py-5" style="background-color: #2B265F; color: white;">
+        <div class="container">
+            <h2>¿Tienes un proyecto en obra gris?</h2>
+            <p>Contáctanos y recibe el respaldo técnico que necesitas para tus instalaciones.</p>
+            <a href="#contacto" class="btn btn-custom mt-3">Solicitar Asesoría</a>
         </div>
     </section>
     <!-- Footer -->

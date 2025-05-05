@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Técnico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        body {
+            background-color: #f4f6fa;
+        }
+
+        .navbar {
+            background-color: #2B265F;
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .btn-outline-light {
+            color: white !important;
+        }
+
+        .btn-custom {
+            background-color: #F47B2A;
+            color: white;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #F9B42E;
+            color: #2B265F;
+        }
+
+        .hero {
+            background-color: #2B265F;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s ease;
+        }
+
+        footer {
+            background-color: #2B265F;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Panel Técnico</a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="/logout">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header class="hero">
+        <h1>Bienvenido, {{ usuario_id.nombre }}</h1>
+        <p>Estos son tus proyectos asignados.</p>
+    </header>
+
+    <!-- Proyectos del técnico -->
+    <main class="container my-5">
+        <h2 class="mb-4 text-center">Mis Proyectos</h2>
+
+        {% set proyectos_tecnico = proyectos|selectattr("tecnico_id", "equalto", usuario_id.id)|list %}
+
+        {% if proyectos_tecnico %}
+        <div class="row g-4">
+            {% for proyecto in proyectos_tecnico %}
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-toolbox text-info"></i> {{ proyecto.nombre }}
+                        </h5>
+                        <p class="card-text">Estado:
+                            {% if proyecto.estado == "completado" %}
+                            <span class="badge bg-success">Completado</span>
+                            {% elif proyecto.estado == "en progreso" %}
+                            <span class="badge bg-primary">En progreso</span>
+                            {% else %}
+                            <span class="badge bg-secondary">{{ proyecto.estado }}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-muted mt-5">No tienes proyectos asignados por ahora.</p>
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 Gestión Técnica. Todos los derechos reservados.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
