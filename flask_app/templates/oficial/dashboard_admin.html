@@ -82,14 +82,28 @@
             <div class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Inicio</a>
+                        <a class="nav-link active" href="#"><i class="fas fa-home"></i> Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-custom me-2" href="#nuevo">Nuevo Proyecto</a>
                     </li>
+
+                    <!-- Botón de Opciones -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="opcionesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cog"></i> Opciones
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="opcionesDropdown">
+                            
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-users-cog me-2"></i>Gestión del
+                                    Personal</a></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item">
                         <a class="btn btn-outline-light" href="#" data-bs-toggle="modal"
-                            data-bs-target="#registroModal">Cerrar Sesión</a>
+                            data-bs-target="#registroModal"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>
@@ -133,6 +147,7 @@
                 {% endfor %}
             </div>
         </div>
+
         <!-- Tarjetas de resumen -->
         <section class="container my-5">
             <div class="row g-4 text-center">

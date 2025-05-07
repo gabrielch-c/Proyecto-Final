@@ -2,21 +2,39 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Gestión de Técnicos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
+        :root {
+            --azul-oscuro: #2B265F;
+            --naranja: #F47B2A;
+            --naranja-claro: #F9B42E;
+        }
+
+        body {
+            background-color: #f4f6fa;
+        }
+
         .btn-custom {
-            background-color: #F47B2A;
+            background-color: var(--naranja);
             color: white;
             border: none;
         }
 
         .btn-custom:hover {
-            background-color: #F9B42E;
-            color: #2B265F;
+            background-color: var(--naranja-claro);
+            color: var(--azul-oscuro);
+        }
+
+        .navbar {
+            background-color: var(--azul-oscuro);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
         }
 
         .navbar-brand {
@@ -26,15 +44,17 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        .hero {
-            background-color: #2B265F;
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
+        .table-container {
+            padding: 100px 40px 40px;
+            /* Margen superior para evitar superposición con navbar */
+        }
+
+        .table td select {
+            width: 100%;
         }
 
         footer {
-            background-color: #2B265F;
+            background-color: var(--azul-oscuro);
             color: white;
             padding: 20px;
             text-align: center;
@@ -43,96 +63,72 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #2B265F;">
+
+    <!-- Navbar con botones -->
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Gestión de Técnicos</a>
-            <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: flex-end;">
-                <ul class="navbar-nav" style="margin-right: 20px;">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav me-3">
                     <li class="nav-item">
-                        <a class="nav-link active" style="color: white" href="#">Dashboard</a>
+                        <a class="nav-link text-white" href="/inicio"><i class="fas fa-home"></i> Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="#">Cerrar sesión</a>
+                        <a class="btn btn-outline-light" href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar
+                            sesión</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <h2 class="mb-4">Proyectos</h2>
-
-        <!-- Filtro por estado -->
-        <div class="mb-4">
-            <label for="filtroEstado" class="form-label">Filtrar por estado:</label>
-            <select class="form-select" id="filtroEstado" onchange="filtrarProyectos()">
-                <option value="todos">Todos</option>
-                <option value="pendiente">Pendientes</option>
-                <option value="en_progreso">En progreso</option>
-                <option value="completado">Completados</option>
-            </select>
-        </div>
-
-        <!-- Lista de proyectos -->
-        <div id="listaProyectos" class="row g-4">
-            <!-- Ejemplo de proyecto -->
-            <!-- Los proyectos deben cargarse dinámicamente con JS o desde el servidor -->
+    <!-- Tabla de usuarios -->
+    <div class="container table-container">
+        <h2 class="mb-4 text-center">Usuarios Registrados</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover bg-white shadow-sm">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Tipo de Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.apellido }}</td>
+                        <td>{{ usuario.correo }}</td>
+                        <td class="text-center">
+                            <select class="form-select" disabled>
+                                <option value="tecnico" {% if usuario.tipo=="tecnico" %}selected{% endif %}>Técnico
+                                </option>
+                                <option value="coordinador" {% if usuario.tipo=="coordinador" %}selected{% endif %}>
+                                    Coordinador</option>
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-sm btn-primary editar-btn me-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="#" class="btn btn-sm btn-danger eliminar-btn">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         © 2025 Soluciones Técnicas en Línea Blanca. Todos los derechos reservados.
     </footer>
-
-    <script>
-        // Ejemplo de datos simulados (normalmente vendrían del servidor)
-        const usuario = {
-            rol: 'coordinador', // cambiar a 'tecnico' para probar filtrado por técnico
-            id: 1 // ID del técnico logueado
-        };
-
-        const proyectos = [
-            { id: 1, titulo: 'Instalación Cocina', estado: 'pendiente', tecnicoId: 1 },
-            { id: 2, titulo: 'Revisión Calefont', estado: 'en_progreso', tecnicoId: 2 },
-            { id: 3, titulo: 'Cambio Lavadora', estado: 'completado', tecnicoId: 1 },
-            { id: 4, titulo: 'Instalación Campana', estado: 'pendiente', tecnicoId: 3 },
-        ];
-
-        function filtrarProyectos() {
-            const estadoFiltro = document.getElementById('filtroEstado').value;
-            const contenedor = document.getElementById('listaProyectos');
-            contenedor.innerHTML = '';
-
-            const filtrados = proyectos.filter(p => {
-                if (usuario.rol === 'tecnico' && p.tecnicoId !== usuario.id) return false;
-                if (estadoFiltro !== 'todos' && p.estado !== estadoFiltro) return false;
-                return true;
-            });
-
-            if (filtrados.length === 0) {
-                contenedor.innerHTML = '<p class="text-muted">No hay proyectos para mostrar.</p>';
-                return;
-            }
-
-            filtrados.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'col-md-4';
-                card.innerHTML = `
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">${p.titulo}</h5>
-                            <p class="card-text">Estado: <strong>${p.estado.replace('_', ' ')}</strong></p>
-                            <p class="card-text">Técnico asignado: ${p.tecnicoId}</p>
-                        </div>
-                    </div>
-                `;
-                contenedor.appendChild(card);
-            });
-        }
-
-        // Carga inicial
-        window.onload = filtrarProyectos;
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

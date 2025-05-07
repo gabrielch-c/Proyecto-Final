@@ -1,23 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Gestión de Técnicos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
+        :root {
+            --azul-oscuro: #2B265F;
+            --naranja: #F47B2A;
+            --naranja-claro: #F9B42E;
+        }
+
+        body {
+            background-color: #f4f6fa;
+        }
+
         .btn-custom {
-            background-color: #F47B2A;
+            background-color: var(--naranja);
             color: white;
             border: none;
         }
 
         .btn-custom:hover {
-            background-color: #F9B42E;
-            color: #2B265F;
+            background-color: var(--naranja-claro);
+            color: var(--azul-oscuro);
+        }
+
+        .navbar {
+            background-color: var(--azul-oscuro);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
         }
 
         .navbar-brand {
@@ -27,286 +44,110 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        .hero {
-            background-color: #2B265F;
+        .table-container {
+            padding: 200px 40px 40px;
+            /* espacio para navbar y header */
+        }
+
+        .table td select {
+            width: 100%;
+        }
+
+        .header-section {
+            background-color: var(--azul-oscuro);
             color: white;
-            padding: 50px 20px;
+            padding: 30px 20px;
             text-align: center;
+            position: relative;
+            top: 70px;
         }
 
         footer {
-            background-color: #2B265F;
+            background-color: var(--azul-oscuro);
             color: white;
             padding: 20px;
             text-align: center;
+            margin-top: 40px;
         }
     </style>
 </head>
 
 <body>
-    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content rounded-4 shadow">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="registroModalLabel">Registro</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="registroNombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="registroNombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="registroApellido" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="registroApellido" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="registroEmail" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="registroEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="registroPassword" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="registroPassword" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="registroConfirmarPassword" class="form-label">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="registroConfirmarPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-custom w-100">Registrarse</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content rounded-4 shadow">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="loginEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="loginPassword" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="loginPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-outline-dark w-100">Ingresar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg " style="background-color: #2B265F; position: fixed; width: 100%; z-index: 1;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Gestión de Técnicos</a>
-            <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: flex-end;">
-                <ul class="navbar-nav" style="margin-right: 20px;">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav me-3">
                     <li class="nav-item">
-                        <a class="nav-link active" style="color: white" aria-current="page" href="#">Inicio</a>
+                        <a class="nav-link text-white" href="/inicio"><i class="fas fa-home"></i> Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="#contacto">Contacto</a>
+                        <a class="btn btn-outline-light" href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar
+                            sesión</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-custom me-2" href="#" data-bs-toggle="modal"
-                            data-bs-target="#registroModal">Registro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#" data-bs-toggle="modal"
-                            data-bs-target="#loginModal">Login</a>
                 </ul>
+            </div>
+        </div>
     </nav>
 
-    <header class="hero" style="top: 15vh;">
-        <h1>Soluciones Técnicas en Línea Blanca</h1>
-        <p>Expertos en gestión e instalación de equipos para proyectos habitacionales.</p>
-        <a href="#nosotros" class="btn btn-custom mt-4">Conócenos</a>
-    </header>
-    <main style="background-color: #e5e9f8;">
-        <section id="nosotros" class="info-section text-center">
-            <div class="container d-flex justify-content-evenly flex-rows align-items-center p-5">
-                <div class="card" style="width: 30rem;">
-                    <img src="../static/img/imagen4.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Misión</h5>
-                        <p class="card-text">Brindar un servicio eficiente, profesional y confiable en la gestión e
-                            instalación de artículos de línea blanca en proyectos inmobiliarios, asegurando coordinación
-                            oportuna y altos estándares de calidad.</p>
-                    </div>
-                </div>
-                <div class="card" style="width: 30rem;">
-                    <img src="../static/img/imagen3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Visión</h5>
-                        <p class="card-text">Ser la empresa líder en gestión técnica especializada para instalaciones de
-                            línea blanca en desarrollos habitacionales, reconocida por su excelencia operativa e
-                            innovación.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- NUEVA SECCIÓN: Servicios -->
-        <section id="servicios" class="text-center py-5" style="background-color: #f4f6fa;">
-            <div class="container">
-                <h2 class="mb-4">Nuestros Servicios</h2>
-                <div class="row">
-                    <div class="col-md-4">
-                        <i class="fas fa-tools fa-3x mb-3" style="color:#2B265F;"></i>
-                        <h5>Instalación de Equipos</h5>
-                        <p>Montaje profesional de electrodomésticos de línea blanca en obras nuevas y remodelaciones.
-                        </p>
-                    </div>
-                    <div class="col-md-4">
-                        <i class="fas fa-user-cog fa-3x mb-3" style="color:#2B265F;"></i>
-                        <h5>Gestión de Técnicos</h5>
-                        <p>Asignación eficiente de personal calificado según los requerimientos de tu obra.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <i class="fas fa-wrench fa-3x mb-3" style="color:#2B265F;"></i>
-                        <h5>Mantenimiento</h5>
-                        <p>Revisiones periódicas y correctivas para asegurar el funcionamiento óptimo de los equipos.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Header con descripción -->
+    <div class="header-section">
+        <h1 class="mb-3">Panel de Administración de Usuarios</h1>
+        <p>Desde esta sección puedes visualizar, editar o eliminar usuarios registrados en el sistema. También puedes
+            revisar su tipo de perfil (técnico o coordinador) y gestionar su información según sea necesario.</p>
+    </div>
 
-        <!-- NUEVA SECCIÓN: Ventajas -->
-        <section id="ventajas" class="text-center py-5 " style="background-color: #ffffff;">
-            <div class="container ">
-                <h2 class="mb-4">¿Por qué elegirnos?</h2>
-                <div class="row">
-                    <div class="col-md-3">
-                        <i class="fas fa-certificate fa-2x mb-2" style="color:#F47B2A;"></i>
-                        <p>Técnicos certificados</p>
-                    </div>
-                    <div class="col-md-3">
-                        <i class="fas fa-clock fa-2x mb-2" style="color:#F47B2A;"></i>
-                        <p>Entrega puntual</p>
-                    </div>
-                    <div class="col-md-3">
-                        <i class="fas fa-map-marked-alt fa-2x mb-2" style="color:#F47B2A;"></i>
-                        <p>Cobertura regional</p>
-                    </div>
-                    <div class="col-md-3">
-                        <i class="fas fa-handshake fa-2x mb-2" style="color:#F47B2A;"></i>
-                        <p>Relación de confianza</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NUEVA SECCIÓN: Clientes o Proyectos -->
-        <section id="clientes" class="text-center py-5" style="background-color: #f4f6fa;">
-            <div class="container">
-                <h2 class="mb-4">Proyectos y Clientes</h2>
-                <p>Estas son algunas de las constructoras y empresas que confían en nosotros:</p>
-                <div class="row justify-content-center">
-                    <div class="col-md-2">
-                        <img src="../static/img/logo1.png" alt="Cliente 1" class="img-fluid mb-3">
-                    </div>
-                    <div class="col-md-2">
-                        <img src="../static/img/logo2.png" alt="Cliente 2" class="img-fluid mb-3">
-                    </div>
-                    <div class="col-md-2">
-                        <img src="../static/img/logo3.png" alt="Cliente 3" class="img-fluid mb-3">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- NUEVA SECCIÓN: Contacto -->
-        <section id="contacto" class="text-center py-5" style="background-color: #6C75A3; color: white;">
-            <div class="container">
-                <h2 class="mb-4">Contáctanos</h2>
-                <p class="mb-5">¿Tienes un proyecto o consulta? Estamos aquí para ayudarte.</p>
-
-                <div class="row g-4 justify-content-center">
-                    <div class="col-md-4">
-                        <div class="card bg-transparent border-0 text-white">
-                            <div class="card-body">
-                                <i class="fas fa-envelope fa-3x mb-3"></i>
-                                <h5 class="card-title">Correo Electrónico</h5>
-                                <p><a href="mailto:contacto@tecnicos.cl"
-                                        class="text-white text-decoration-none">contacto@tecnicos.cl</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card bg-transparent border-0 text-white">
-                            <div class="card-body">
-                                <i class="fas fa-phone fa-3x mb-3"></i>
-                                <h5 class="card-title">Teléfono</h5>
-                                <p><a href="tel:+56912345678" class="text-white text-decoration-none">+56 9 1234
-                                        5678</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card bg-transparent border-0 text-white">
-                            <div class="card-body">
-                                <i class="fab fa-whatsapp fa-3x mb-3"></i>
-                                <h5 class="card-title">WhatsApp</h5>
-                                <p><a href="https://wa.me/56912345678" target="_blank"
-                                        class="text-white text-decoration-none">+56 9 1234 5678</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Formulario de contacto opcional -->
-
-            </div>
-            <div class="mt-5 mb-5 p-5" style="background-color: #F47B2A; color: white;">
-                <h5>¿Prefieres que te contactemos?</h5>
-                <form class="row g-3 justify-content-center mt-3">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Tu nombre" required>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="email" class="form-control" placeholder="Tu correo" required>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea class="form-control" rows="3" placeholder="Mensaje" required></textarea>
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <button type="submit" class="btn btn-custom w-100">Enviar Mensaje</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-
-    <section class="text-center py-5" style="background-color: #2B265F; color: white;">
-        <div class="container">
-            <h2>¿Tienes un proyecto en obra gris?</h2>
-            <p>Contáctanos y recibe el respaldo técnico que necesitas para tus instalaciones.</p>
-            <a href="#contacto" class="btn btn-custom mt-3">Solicitar Asesoría</a>
+    <!-- Tabla de usuarios -->
+    <div class="container table-container">
+        <h2 class="mb-4 text-center">Usuarios Registrados</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover bg-white shadow-sm">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Tipo de Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.apellido }}</td>
+                        <td>{{ usuario.correo }}</td>
+                        <td class="text-center">
+                            <select class="form-select" disabled>
+                                <option value="tecnico" {% if usuario.tipo=="tecnico" %}selected{% endif %}>Técnico
+                                </option>
+                                <option value="coordinador" {% if usuario.tipo=="coordinador" %}selected{% endif %}>
+                                    Coordinador</option>
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-sm btn-primary editar-btn me-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="#" class="btn btn-sm btn-danger eliminar-btn">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-    </section>
+    </div>
+
     <!-- Footer -->
     <footer>
         © 2025 Soluciones Técnicas en Línea Blanca. Todos los derechos reservados.
     </footer>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
